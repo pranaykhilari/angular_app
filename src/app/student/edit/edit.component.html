@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">Full Name</label>
+        <input type="text" class="form-control"
+               formControlName="Name"
+               #Name [(ngModel)]="student.name"/>
+      </div>
+      <div
+        *ngIf="angForm.controls['Name'].invalid && (angForm.controls['Name'].dirty || angForm.controls['Name'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="angForm.controls['Name'].errors.required">
+          Full Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Email </label>
+        <input type="text" class="form-control" formControlName="Email" #Email [(ngModel)]="student.email"/>
+      </div>
+      <div
+        *ngIf="angForm.controls['Email'].invalid && (angForm.controls['Email'].dirty || angForm.controls['Email'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="angForm.controls['Email'].errors.required">
+          Email is required.
+        </div>
+        <div *ngIf="angForm.controls['Email'].errors.email">Email must be a valid email address</div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Phone Number</label>
+        <input type="tel" class="form-control" formControlName="Phone" #Phone [(ngModel)]="student.phone_num"/>
+      </div>
+      <div class="form-group">
+        <button (click)="editStudent(Name.value, Email.value, Phone.value)" type="submit" class="btn btn-primary"
+                [disabled]="angForm.pristine || angForm.invalid">
+          Update Student
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
